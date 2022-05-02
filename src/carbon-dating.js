@@ -19,16 +19,20 @@ const HALF_LIFE_PERIOD = 5730;
  */
 let k = 0.693 / HALF_LIFE_PERIOD;
 function dateSample(sampleActivity) {
-  if (typeof sampleActivity != "string"){
-    return false;
-  }
-  if (typeof parseFloat(sampleActivity) != 'number' || parseFloat(sampleActivity) === NaN){
-    return false;
-  }
-  if(+sampleActivity <= 0 ){
-    return false;
+  if(typeof sampleActivity === 'string'){
+    if(+sampleActivity > 0 ){
+    console.log(typeof sampleActivity);
+      if (Math.ceil(Math.log(MODERN_ACTIVITY / +sampleActivity) / k) < 0){
+        return false;
+      }else{
+        return Math.ceil(Math.log(MODERN_ACTIVITY / +sampleActivity) / k);
+      }
+    
+    }else{
+      return false;
+    }
   }else{
-    return Math.ceil(Math.log(MODERN_ACTIVITY / +sampleActivity) / k);
+      return false;
   }
   // remove line with error and write your code here
   
